@@ -1,0 +1,25 @@
+Semaphore ya_imprimio_HM = new Semaphore(0);
+Semaphore ya_imprimio_HH = new Semaphore(0);
+Semaphore ya_imprimio_AM = new Semaphore(0);
+
+//Garantizar que la unica salida posible sea: 
+//Hola Marce
+//Hola H
+//Adios Marce
+//Adios H
+
+thread T1:{
+	print("Hola Marce");
+	ya_imprimio_HM.release();
+	ya_imprimio_HH.acquire();
+	print("Adios Marce");
+	ya_imprimio_AM.release();
+}
+
+thread T2:{
+	ya_imprimio_HM.acquire();
+	print("Hola H");
+	ya_imprimio_HH.release();
+	ya_imprimio_AM.acquire();
+	print("Adios H");
+}
